@@ -1,0 +1,65 @@
+{
+  "users": [],
+  "events": [
+    {
+      "id": 1,
+      "date": "2025-01-18",
+      "title": "Annual Team Building Summit",
+      "status": "Registered",
+      "startTime": "09:00 AM",
+      "endTime": "05:00 PM",
+      "location": "Grand Conference Hall",
+      "category": "Team Building",
+      "description": "Join us for a full day of engaging activities, workshops, and networking opportunities designed to strengthen team bonds and boost collaboration.",
+      "registeredCount": 142,
+      "spotsLeft": 8,
+      "totalSpots": 150,
+      "waitlistCount": 0
+    },
+    {
+      "id": 2,
+      "date": "2025-01-20",
+      "title": "Leadership Workshop: Effective Communication",
+      "status": "Registered",
+      "startTime": "02:00 PM",
+      "endTime": "04:30 PM",
+      "location": "Training Room B",
+      "category": "Workshop",
+      "description": "Enhance your leadership skills with this interactive workshop focusing on communication strategies, active listening, and team motivation techniques.",
+      "registeredCount": 28,
+      "spotsLeft": 2,
+      "totalSpots": 30,
+      "waitlistCount": 0
+    },
+    {
+      "id": 3,
+      "date": "2025-01-24",
+      "title": "Happy Friday: Game Night",
+      "status": "Waitlisted",
+      "startTime": "06:00 PM",
+      "endTime": "09:00 PM",
+      "location": "Recreation Lounge",
+      "category": "Happy Friday",
+      "description": "Unwind after a productive week with board games, video games, and refreshments. A perfect opportunity to socialize with colleagues in a relaxed setting.",
+      "registeredCount": 50,
+      "spotsLeft": 0,
+      "totalSpots": 50,
+      "waitlistCount": 12
+    },
+    {
+      "id": 4,
+      "date": "2025-01-26",
+      "title": "Tech Talk: AI in Business Operations",
+      "status": "Registered",
+      "startTime": "11:00 AM",
+      "endTime": "12:30 PM",
+      "location": "Virtual Meeting",
+      "category": "Workshop",
+      "description": "Explore the latest AI technologies and their practical applications in streamlining business operations. Guest speaker from TechCorp will share insights and case studies.",
+      "registeredCount": 67,
+      "spotsLeft": 33,
+      "totalSpots": 100,
+      "waitlistCount": 0
+    }
+  ]
+}
