@@ -13,6 +13,9 @@ export interface SignInPayload {
   password: string;
   rememberMe: boolean;
 }
+export interface ForgotPasswordPayload {
+  email: string;
+}
 
 export interface User {
   id: number;
@@ -69,6 +72,29 @@ export class AuthMockService {
       return { success: true, token };
     } catch (error) {
       console.error('Login error:', error);
+      return { success: false, error: 'Connection error. Please check if json-server is running.' };
+    }
+  }
+
+  async forgotPassword(
+    payload: ForgotPasswordPayload
+  ): Promise<{ success: boolean; error?: string }> {
+    try {
+      if (!payload.email) {
+        return { success: false, error: 'Email is required' };
+      }
+
+      const users = await firstValueFrom(
+        this.http.get<User[]>(`${this.apiUrl}/users?email=${encodeURIComponent(payload.email)}`)
+      );
+
+      if (users.length === 0) {
+        return { success: true };
+      }
+
+      return { success: true };
+    } catch (error) {
+      console.error('Forgot password error:', error);
       return { success: false, error: 'Connection error. Please check if json-server is running.' };
     }
   }
