@@ -1,0 +1,101 @@
+<header class="header">
+  <div class="header-container">
+    <div class="header-left">
+      <img src="assets/header/TBC-ge.jpg" alt="logo" class="logo" />
+      <h1 class="brand-name">Event-Hub</h1>
+    </div>
+
+    <nav class="header-nav">
+      @for (item of navItems; track item.route) {
+      <a
+        [routerLink]="item.route"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: item.route === '/home' }"
+        class="nav-link"
+      >
+        {{ item.label }}
+      </a>
+      }
+    </nav>
+
+    <div class="header-right">
+      <button class="notification-btn" (click)="onNotificationClick()" type="button">
+        <img src="assets/header/notification.svg" alt="notification" />
+        @if (hasNotifications()) {
+        <span class="notification-badge">{{ notificationDisplay() }}</span>
+        }
+      </button>
+
+      <div class="user-profile-wrapper">
+        <button class="user-profile-btn" (click)="onProfileClick()" type="button">
+          <div class="user-avatar">
+            <img src="assets/header/employee.svg" alt="user" />
+          </div>
+          <div class="user-info">
+            <span class="user-name">{{ user().name }}</span>
+            <span class="user-role">{{ user().role }}</span>
+          </div>
+          <svg
+            class="dropdown-arrow"
+            [class.open]="showProfileDropdown()"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M4 6L8 10L12 6"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+
+        @if (showProfileDropdown()) {
+        <div class="profile-dropdown">
+          <div class="dropdown-header">
+            <div class="dropdown-user-name">{{ user().name }}</div>
+            <div class="dropdown-user-email">{{ user().role }}</div>
+          </div>
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item" (click)="logout()" type="button">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6 14H3.33333C2.97971 14 2.64057 13.8595 2.39052 13.6095C2.14048 13.3594 2 13.0203 2 12.6667V3.33333C2 2.97971 2.14048 2.64057 2.39052 2.39052C2.64057 2.14048 2.97971 2 3.33333 2H6"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M10 11.3333L14 7.33333L10 3.33333"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M14 7.33333H6"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span>Log out</span>
+          </button>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</header>

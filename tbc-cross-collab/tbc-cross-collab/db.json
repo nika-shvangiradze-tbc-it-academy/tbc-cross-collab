@@ -9,7 +9,7 @@
       "phone": "admin",
       "department": "Engineering",
       "name": "nika shvangiradze",
-      "status": "organizer"
+      "status": "employee"
     },
     {
       "id": "ea42",
@@ -20,7 +20,8 @@
       "phone": "+995551099081",
       "department": "Engineering",
       "name": "nika shvangiradze",
-      "status": "employee"
+
+      "status": "organizer"
     },
     {
       "id": "8e16",
