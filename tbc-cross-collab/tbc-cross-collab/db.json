@@ -1,8 +1,39 @@
 {
-  "users": [],
+  "users": [
+    {
+      "id": "7da7",
+      "email": "admin@example.com",
+      "password": "Nikalado2001",
+      "firstName": "nika",
+      "lastName": "shvangiradze",
+      "phone": "admin",
+      "department": "Engineering",
+      "name": "nika shvangiradze"
+    },
+    {
+      "id": "ea42",
+      "email": "nika@gmail.com",
+      "password": "Nikalado2001",
+      "firstName": "nika",
+      "lastName": "shvangiradze",
+      "phone": "+995551099081",
+      "department": "Engineering",
+      "name": "nika shvangiradze"
+    },
+    {
+      "id": "8e16",
+      "email": "admin1@example.com",
+      "password": "Nikalado2001",
+      "firstName": "nika",
+      "lastName": "shvangiradze",
+      "phone": "+995551099081",
+      "department": "Engineering",
+      "name": "nika shvangiradze"
+    }
+  ],
   "events": [
     {
-      "id": 1,
+      "id": "1",
       "date": "2025-01-18",
       "title": "Annual Team Building Summit",
       "status": "Registered",
@@ -17,7 +48,7 @@
       "waitlistCount": 0
     },
     {
-      "id": 2,
+      "id": "2",
       "date": "2025-01-20",
       "title": "Leadership Workshop: Effective Communication",
       "status": "Registered",
@@ -32,7 +63,7 @@
       "waitlistCount": 0
     },
     {
-      "id": 3,
+      "id": "3",
       "date": "2025-01-24",
       "title": "Happy Friday: Game Night",
       "status": "Waitlisted",
@@ -47,7 +78,7 @@
       "waitlistCount": 12
     },
     {
-      "id": 4,
+      "id": "4",
       "date": "2025-01-26",
       "title": "Tech Talk: AI in Business Operations",
       "status": "Registered",

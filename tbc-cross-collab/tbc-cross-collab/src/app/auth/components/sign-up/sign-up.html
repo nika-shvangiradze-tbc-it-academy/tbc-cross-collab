@@ -1,1 +1,154 @@
-<p>sign-up works!</p>
+<div class="auth-page">
+  <div class="card wide">
+    <h1>Create Account</h1>
+    <p class="subtitle">Enter your details to get started.</p>
+
+    <form (ngSubmit)="onSubmit()" #formRef="ngForm" class="grid">
+      <div class="field">
+        <label>First Name</label>
+        <input
+          type="text"
+          name="firstName"
+          required
+          [(ngModel)]="form.firstName"
+          placeholder="John"
+        />
+      </div>
+
+      <div class="field">
+        <label>Last Name</label>
+        <input type="text" name="lastName" required [(ngModel)]="form.lastName" placeholder="Doe" />
+      </div>
+
+      <div class="field full">
+        <label>Email</label>
+        <input
+          type="email"
+          name="email"
+          required
+          [(ngModel)]="form.email"
+          placeholder="john.doe@company.com"
+        />
+      </div>
+
+      <div class="field full">
+        <label>Phone Number</label>
+        <div class="phone-input-group">
+          <input
+            type="text"
+            name="phone"
+            required
+            [(ngModel)]="form.phone"
+            placeholder="+1 (555) 000-0000"
+            class="phone-input"
+          />
+          <button type="button" class="btn-send-otp" (click)="sendOtp()">Send OTP</button>
+        </div>
+      </div>
+
+      @if (showOtpSection()) {
+      <div class="field full otp-section">
+        <div class="otp-container">
+          <div class="otp-header">
+            <svg
+              class="otp-icon"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8 1L2 4V7C2 10.5 4.5 13.5 8 14.5C11.5 13.5 14 10.5 14 7V4L8 1Z"
+                fill="#3B82F6"
+                stroke="#3B82F6"
+                stroke-width="1.5"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M6 8L7.5 9.5L10 7"
+                stroke="white"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span class="otp-label">Enter OTP Code</span>
+          </div>
+          <div class="otp-inputs" (click)="onOtpInputClick()">
+            @for (digit of otpCode(); track $index) {
+            <input type="text" [value]="digit" readonly class="otp-digit" maxlength="1" />
+            }
+          </div>
+          <div class="otp-footer">
+            <span class="otp-timer">Code expires in {{ formatTimer(otpTimer()) }}</span>
+            <button type="button" class="otp-resend" (click)="resendOtp()">Resend Code</button>
+          </div>
+        </div>
+      </div>
+      }
+
+      <div class="field full">
+        <label>Department</label>
+        <select name="department" required [(ngModel)]="form.department">
+          <option value="" disabled selected>Select Department</option>
+          @for (d of departments; track d) {
+          <option [value]="d">{{ d }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Password</label>
+        <input
+          type="password"
+          name="password"
+          required
+          minlength="8"
+          [(ngModel)]="form.password"
+          placeholder="Create password"
+        />
+        <span class="hint">
+          Password must be at least 8 characters with uppercase, lowercase, and numbers.
+        </span>
+      </div>
+
+      <div class="field">
+        <label>Confirm Password</label>
+        <input
+          type="password"
+          name="confirmPassword"
+          required
+          [(ngModel)]="form.confirmPassword"
+          placeholder="Confirm password"
+        />
+      </div>
+
+      <div class="field full terms">
+        <label>
+          <input type="checkbox" name="terms" [(ngModel)]="agreeToTerms" />
+          <span> I agree to the Terms of Service and Privacy Policy </span>
+        </label>
+      </div>
+
+      @if (error()) {
+      <div class="error full">
+        {{ error() }}
+      </div>
+      } @if (success()) {
+      <div class="success full">Account created successfully (mock).</div>
+      }
+
+      <div class="field full">
+        <button class="btn-primary" type="submit" [disabled]="formRef.invalid || !canSubmit()">
+          {{ loading() ? 'Creating account...' : 'Create Account' }}
+        </button>
+      </div>
+    </form>
+
+    <p class="footer-text">
+      Already have an account?
+      <a routerLink="/auth/login" class="link-strong">Sign in</a>
+    </p>
+  </div>
+</div>

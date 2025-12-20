@@ -13,6 +13,17 @@ export interface SignInPayload {
   password: string;
   rememberMe: boolean;
 }
+
+export interface SignUpPayload {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  department: string;
+  password: string;
+  confirmPassword: string;
+}
+
 export interface ForgotPasswordPayload {
   email: string;
 }
@@ -45,6 +56,10 @@ export class AuthMockService {
     return localStorage.getItem(this.TOKEN_KEY);
   }
 
+  setToken(token: string): void {
+    localStorage.setItem(this.TOKEN_KEY, token);
+  }
+
   logout(): void {
     localStorage.removeItem(this.TOKEN_KEY);
   }
@@ -69,9 +84,48 @@ export class AuthMockService {
 
       const token = `token_${user.id}_${Date.now()}`;
 
+      this.setToken(token);
+
       return { success: true, token };
     } catch (error) {
       console.error('Login error:', error);
+      return { success: false, error: 'Connection error. Please check if json-server is running.' };
+    }
+  }
+
+  async register(
+    payload: SignUpPayload
+  ): Promise<{ success: boolean; userId?: string; error?: string }> {
+    try {
+      if (payload.password !== payload.confirmPassword) {
+        return { success: false, error: 'Passwords do not match' };
+      }
+
+      const existingUsers = await firstValueFrom(
+        this.http.get<User[]>(`${this.apiUrl}/users?email=${encodeURIComponent(payload.email)}`)
+      );
+
+      if (existingUsers.length > 0) {
+        return { success: false, error: 'User with this email already exists' };
+      }
+
+      const newUser: Omit<User, 'id'> = {
+        email: payload.email,
+        password: payload.password,
+        firstName: payload.firstName,
+        lastName: payload.lastName,
+        phone: payload.phone,
+        department: payload.department,
+        name: `${payload.firstName} ${payload.lastName}`,
+      };
+
+      const createdUser = await firstValueFrom(
+        this.http.post<User>(`${this.apiUrl}/users`, newUser)
+      );
+
+      return { success: true, userId: createdUser.id.toString() };
+    } catch (error) {
+      console.error('Register error:', error);
       return { success: false, error: 'Connection error. Please check if json-server is running.' };
     }
   }
