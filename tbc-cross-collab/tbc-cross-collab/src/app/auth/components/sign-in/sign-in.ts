@@ -44,7 +44,10 @@ export class SignInComponent {
           localStorage.setItem('auth_token', res.token);
         }
 
-        const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/features/event-hub';
+        // Redirect based on user status
+        const returnUrl =
+          this.route.snapshot.queryParams['returnUrl'] ||
+          (res.user?.status === 'organizer' ? '/features/event-management' : '/features/event-hub');
         setTimeout(() => {
           this.router.navigate([returnUrl]);
         }, 500);
