@@ -1,0 +1,12 @@
+::ng-deep {
+  .custom-button {
+    background-color: #007bff !important;
+    border-color: #007bff !important;
+
+    &:hover,
+    &:not(:disabled):hover {
+      background-color: #0056b3 !important;
+      border-color: #0056b3 !important;
+    }
+  }
+}
