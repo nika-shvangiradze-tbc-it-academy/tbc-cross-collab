@@ -16,6 +16,7 @@ export class EventHub implements OnInit {
 
   events = signal<Event[]>([]);
   allEvents = signal<Event[]>([]);
+  trendingEvents = signal<Event[]>([]);
   loading = signal(true);
   userName = signal('Sarah');
   selectedCategory = signal<string | null>(null);
@@ -31,11 +32,20 @@ export class EventHub implements OnInit {
       const events = await this.eventsService.getEventsAsync();
       this.allEvents.set(events);
       this.events.set(events);
+      this.loadTrendingEvents(events);
     } catch (error) {
       console.error('Error loading events:', error);
     } finally {
       this.loading.set(false);
     }
+  }
+
+  loadTrendingEvents(allEvents: Event[]) {
+    // Get top 3 events by registeredCount (most popular)
+    const trending = [...allEvents]
+      .sort((a, b) => b.registeredCount - a.registeredCount)
+      .slice(0, 3);
+    this.trendingEvents.set(trending);
   }
 
   loadUserName() {
@@ -56,6 +66,27 @@ export class EventHub implements OnInit {
     const month = date.toLocaleDateString('en-US', { month: 'short' });
     const day = date.getDate().toString();
     return { month, day };
+  }
+
+  formatDateForTrending(dateString: string): string {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  }
+
+  formatDateRange(startDate: string, endDate?: string): string {
+    if (endDate) {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      return `${start.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+      })} - ${end.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+      })}`;
+    }
+    return this.formatDateForTrending(startDate);
   }
 
   getStatusClass(status: string): string {

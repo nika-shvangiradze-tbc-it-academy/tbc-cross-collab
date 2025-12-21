@@ -97,4 +97,44 @@
       }
     </div>
   </div>
+
+  @if (trendingEvents().length > 0) {
+  <div class="trending-section">
+    <div class="trending-header">
+      <h2 class="trending-title">Trending Events</h2>
+      <p class="trending-subtitle">Popular events with high registration rates</p>
+    </div>
+    <div class="trending-events-list">
+      @for (event of trendingEvents(); track event.id) {
+      <div class="trending-event-card">
+        <div class="trending-event-image">
+          <span class="image-placeholder">{{ event.title }}</span>
+        </div>
+        <div class="trending-event-tags">
+          <span class="tag category-tag">{{ event.category }}</span>
+          <span class="tag trending-tag">Trending</span>
+        </div>
+        <h3 class="trending-event-title">{{ event.title }}</h3>
+        <div class="trending-event-details">
+          <span class="trending-detail-item">
+            <span class="trending-icon">📅</span>
+            {{ formatDateForTrending(event.date) }}
+          </span>
+          <span class="trending-detail-item">
+            <span class="trending-icon">📍</span>
+            {{ event.location }}
+          </span>
+        </div>
+        <div class="trending-event-footer">
+          <span class="trending-attendance">
+            <span class="people-icons">👥👥</span>
+            +{{ event.registeredCount }} going
+          </span>
+          <button class="register-btn">Register</button>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+  }
 </div>
