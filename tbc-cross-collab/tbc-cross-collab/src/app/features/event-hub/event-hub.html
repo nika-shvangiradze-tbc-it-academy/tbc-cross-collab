@@ -9,10 +9,14 @@
   <div class="events-section">
     <div class="events-header">
       <h2 class="events-title">Upcoming Events</h2>
+      @if (selectedCategory()) {
+      <button class="clear-filter-btn" (click)="selectCategory(null)">Clear filter</button>
+      } @else {
       <a href="#" class="view-all-link">
         <span class="arrow-icon">→</span>
         View all
       </a>
+      }
     </div>
 
     @if (loading()) {
@@ -66,5 +70,31 @@
       }
     </div>
     }
+  </div>
+
+  <div class="categories-section">
+    <h2 class="categories-title">Browse by Category</h2>
+    <div class="categories-list">
+      <div
+        class="category-card"
+        [class.active]="selectedCategory() === null"
+        (click)="selectCategory(null)"
+      >
+        <div class="category-icon">📅</div>
+        <div class="category-name">All Events</div>
+        <div class="category-count">{{ allEvents().length }} events</div>
+      </div>
+      @for (category of getCategories(); track category.name) {
+      <div
+        class="category-card"
+        [class.active]="selectedCategory() === category.name"
+        (click)="selectCategory(category.name)"
+      >
+        <div class="category-icon">{{ category.icon }}</div>
+        <div class="category-name">{{ category.name }}</div>
+        <div class="category-count">{{ category.count }} events</div>
+      </div>
+      }
+    </div>
   </div>
 </div>

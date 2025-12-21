@@ -15,8 +15,10 @@ export class EventHub implements OnInit {
   private eventsService = inject(EventsService);
 
   events = signal<Event[]>([]);
+  allEvents = signal<Event[]>([]);
   loading = signal(true);
   userName = signal('Sarah');
+  selectedCategory = signal<string | null>(null);
 
   async ngOnInit() {
     await this.loadEvents();
@@ -27,6 +29,7 @@ export class EventHub implements OnInit {
     this.loading.set(true);
     try {
       const events = await this.eventsService.getEventsAsync();
+      this.allEvents.set(events);
       this.events.set(events);
     } catch (error) {
       console.error('Error loading events:', error);
@@ -64,5 +67,49 @@ export class EventHub implements OnInit {
       return `Full (${event.waitlistCount} on waitlist)`;
     }
     return `${event.spotsLeft} spots left`;
+  }
+
+  getCategories(): Array<{ name: string; count: number; icon: string }> {
+    const categoryMap = new Map<string, number>();
+
+    this.allEvents().forEach((event) => {
+      const category = event.category;
+      categoryMap.set(category, (categoryMap.get(category) || 0) + 1);
+    });
+
+    const categoryIcons: Record<string, string> = {
+      'Team Building': '👥',
+      Sports: '🏀',
+      Workshops: '💼',
+      Workshop: '💼',
+      'Happy Friday': '🥂',
+      Cultural: '🌍',
+      Wellness: '❤️',
+    };
+
+    return Array.from(categoryMap.entries())
+      .map(([name, count]) => ({
+        name,
+        count,
+        icon: categoryIcons[name] || '📅',
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  selectCategory(category: string | null) {
+    this.selectedCategory.set(category);
+    this.filterEvents();
+  }
+
+  filterEvents() {
+    const category = this.selectedCategory();
+    const allEvents = this.allEvents();
+
+    if (!category) {
+      this.events.set(allEvents);
+    } else {
+      const filtered = allEvents.filter((event) => event.category === category);
+      this.events.set(filtered);
+    }
   }
 }
