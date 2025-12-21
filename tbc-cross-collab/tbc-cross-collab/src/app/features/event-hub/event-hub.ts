@@ -2,12 +2,13 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { Header } from '../../shared/components/header/header';
+import { CalendarComponent } from './components/calendar/calendar.component';
 import { EventsService, Event } from './services/events.service';
 
 @Component({
   selector: 'app-event-hub',
   standalone: true,
-  imports: [CommonModule, ButtonModule, Header],
+  imports: [CommonModule, ButtonModule, Header, CalendarComponent],
   templateUrl: './event-hub.html',
   styleUrl: './event-hub.scss',
 })

@@ -1,0 +1,49 @@
+<div class="calendar-section">
+  <div class="calendar-header">
+    <h2 class="calendar-title">{{ getMonthYearString() }}</h2>
+    <div class="calendar-controls">
+      <button class="calendar-nav-btn" (click)="goToPreviousMonth()" aria-label="Previous month">
+        <span class="nav-icon">‹</span>
+      </button>
+      <button class="calendar-today-btn" (click)="goToToday()">Today</button>
+      <button class="calendar-nav-btn" (click)="goToNextMonth()" aria-label="Next month">
+        <span class="nav-icon">›</span>
+      </button>
+      <button class="calendar-full-btn" (click)="openFullCalendar()">Full Calendar</button>
+    </div>
+  </div>
+  <div class="calendar-grid">
+    <div class="calendar-weekdays">
+      <div class="weekday">SUN</div>
+      <div class="weekday">MON</div>
+      <div class="weekday">TUE</div>
+      <div class="weekday">WED</div>
+      <div class="weekday">THU</div>
+      <div class="weekday">FRI</div>
+      <div class="weekday">SAT</div>
+    </div>
+    <div class="calendar-days">
+      @for (week of getCalendarWeeks(); track week[0]?.getTime() || $index) { @for (day of week;
+      track day.getTime()) {
+      <div
+        class="calendar-date-cell"
+        [class.today]="isToday(day)"
+        [class.other-month]="day.getMonth() !== currentMonth().getMonth()"
+      >
+        <div class="date-number">{{ day.getDate() }}</div>
+        <div class="date-events">
+          @for (event of getEventsForDate(day); track event.id) {
+          <div
+            class="event-bar"
+            [class.event-dark]="getEventColor(event) === 'dark'"
+            [class.event-light]="getEventColor(event) === 'light'"
+          >
+            {{ event.title }}
+          </div>
+          }
+        </div>
+      </div>
+      } }
+    </div>
+  </div>
+</div>
