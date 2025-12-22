@@ -42,7 +42,6 @@ export class EventHub implements OnInit {
   }
 
   loadTrendingEvents(allEvents: Event[]) {
-    // Get top 3 events by registeredCount (most popular)
     const trending = [...allEvents]
       .sort((a, b) => b.registeredCount - a.registeredCount)
       .slice(0, 3);
@@ -110,20 +109,20 @@ export class EventHub implements OnInit {
     });
 
     const categoryIcons: Record<string, string> = {
-      'Team Building': '👥',
-      Sports: '🏀',
-      Workshops: '💼',
-      Workshop: '💼',
-      'Happy Friday': '🥂',
-      Cultural: '🌍',
-      Wellness: '❤️',
+      'Team Building': 'assets/event-hub/event-team-building.svg',
+      Sports: 'assets/event-hub/event-category-filter-sports.svg',
+      Workshops: 'assets/event-hub/event-filter-workshops.svg',
+      Workshop: 'assets/event-hub/event-filter-workshops.svg',
+      'Happy Friday': 'assets/event-hub/event-filter-happy-friday.svg',
+      Cultural: 'assets/event-hub/event-filter-cultural.svg',
+      Wellness: 'assets/event-hub/event-filter-wellness.svg',
     };
 
     return Array.from(categoryMap.entries())
       .map(([name, count]) => ({
         name,
         count,
-        icon: categoryIcons[name] || '📅',
+        icon: categoryIcons[name] || 'assets/event-hub/event-team-building.svg',
       }))
       .sort((a, b) => a.name.localeCompare(b.name));
   }

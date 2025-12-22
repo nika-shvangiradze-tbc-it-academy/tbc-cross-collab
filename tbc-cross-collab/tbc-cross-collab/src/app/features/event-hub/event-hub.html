@@ -42,15 +42,15 @@
 
           <div class="event-details">
             <span class="detail-item">
-              <span class="icon">🕐</span>
+              <img src="assets/event-hub/event-clock.svg" alt="clock" class="icon" />
               {{ event.startTime }} - {{ event.endTime }}
             </span>
             <span class="detail-item">
-              <span class="icon">📍</span>
+              <img src="assets/event-hub/event-location.svg" alt="location" class="icon" />
               {{ event.location }}
             </span>
             <span class="detail-item">
-              <span class="icon">🏷️</span>
+              <img src="assets/event-hub/event-team-building.svg" alt="tag" class="icon" />
               {{ event.category }}
             </span>
           </div>
@@ -80,7 +80,11 @@
         [class.active]="selectedCategory() === null"
         (click)="selectCategory(null)"
       >
-        <div class="category-icon">📅</div>
+        <img
+          src="assets/event-hub/event-team-building.svg"
+          alt="all events"
+          class="category-icon"
+        />
         <div class="category-name">All Events</div>
         <div class="category-count">{{ allEvents().length }} events</div>
       </div>
@@ -90,7 +94,7 @@
         [class.active]="selectedCategory() === category.name"
         (click)="selectCategory(category.name)"
       >
-        <div class="category-icon">{{ category.icon }}</div>
+        <img [src]="category.icon" alt="category" class="category-icon" />
         <div class="category-name">{{ category.name }}</div>
         <div class="category-count">{{ category.count }} events</div>
       </div>
@@ -117,11 +121,11 @@
         <h3 class="trending-event-title">{{ event.title }}</h3>
         <div class="trending-event-details">
           <span class="trending-detail-item">
-            <span class="trending-icon">📅</span>
+            <img src="assets/event-hub/event-clock.svg" alt="clock" class="trending-icon" />
             {{ formatDateForTrending(event.date) }}
           </span>
           <span class="trending-detail-item">
-            <span class="trending-icon">📍</span>
+            <img src="assets/event-hub/event-location.svg" alt="location" class="trending-icon" />
             {{ event.location }}
           </span>
         </div>
