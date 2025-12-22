@@ -37,6 +37,7 @@ export interface User {
   lastName?: string;
   phone?: string;
   department?: string;
+  status?: 'employee' | 'organizer';
 }
 
 @Injectable({
@@ -66,7 +67,7 @@ export class AuthMockService {
 
   async login(
     payload: SignInPayload
-  ): Promise<{ success: boolean; token?: string; error?: string }> {
+  ): Promise<{ success: boolean; token?: string; error?: string; user?: User }> {
     try {
       const users = await firstValueFrom(
         this.http.get<User[]>(`${this.apiUrl}/users?email=${encodeURIComponent(payload.email)}`)
@@ -86,7 +87,10 @@ export class AuthMockService {
 
       this.setToken(token);
 
-      return { success: true, token };
+      // Store user data in localStorage for easy access
+      localStorage.setItem('user_data', JSON.stringify(user));
+
+      return { success: true, token, user };
     } catch (error) {
       console.error('Login error:', error);
       return { success: false, error: 'Connection error. Please check if json-server is running.' };
@@ -117,6 +121,7 @@ export class AuthMockService {
         phone: payload.phone,
         department: payload.department,
         name: `${payload.firstName} ${payload.lastName}`,
+        status: 'employee',
       };
 
       const createdUser = await firstValueFrom(

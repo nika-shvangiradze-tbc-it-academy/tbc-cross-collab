@@ -8,7 +8,8 @@
       "lastName": "shvangiradze",
       "phone": "admin",
       "department": "Engineering",
-      "name": "nika shvangiradze"
+      "name": "nika shvangiradze",
+      "status": "employee"
     },
     {
       "id": "ea42",
@@ -18,7 +19,9 @@
       "lastName": "shvangiradze",
       "phone": "+995551099081",
       "department": "Engineering",
-      "name": "nika shvangiradze"
+      "name": "nika shvangiradze",
+
+      "status": "organizer"
     },
     {
       "id": "8e16",
@@ -28,69 +31,142 @@
       "lastName": "shvangiradze",
       "phone": "+995551099081",
       "department": "Engineering",
-      "name": "nika shvangiradze"
+      "name": "nika shvangiradze",
+      "status": "employee"
+    },
+    {
+      "id": "jennifer01",
+      "email": "jennifer.adams@company.com",
+      "password": "password123",
+      "firstName": "Jennifer",
+      "lastName": "Adams",
+      "phone": "+1234567890",
+      "department": "Human Resources Department",
+      "name": "Jennifer Adams",
+      "status": "organizer",
+      "title": "HR Events Manager"
     }
   ],
   "events": [
     {
-      "id": "1",
-      "date": "2025-01-18",
-      "title": "Annual Team Building Summit",
-      "status": "Registered",
-      "startTime": "09:00 AM",
-      "endTime": "05:00 PM",
-      "location": "Grand Conference Hall",
-      "category": "Team Building",
-      "description": "Join us for a full day of engaging activities, workshops, and networking opportunities designed to strengthen team bonds and boost collaboration.",
-      "registeredCount": 142,
-      "spotsLeft": 8,
-      "totalSpots": 150,
-      "waitlistCount": 0
+      "id": 5,
+      "title": "Wellness Yoga Session",
+      "description": "Morning yoga and meditation for employee wellness and stress relief",
+      "eventTypeName": "Social",
+      "startDateTime": "2026-01-01T09:11:32.1139895",
+      "endDateTime": "2026-01-01T10:41:32.1139895",
+      "location": "Outdoor Garden",
+      "capacity": 15,
+      "confirmedCount": 4,
+      "waitlistedCount": 0,
+      "isFull": false,
+      "organizerName": "Sarah Miller",
+      "organizerPosition": "Event Manager",
+      "organizerDepartment": "Human Resources",
+      "speakers": [
+        {
+          "id": 6,
+          "name": "Priya Sharma",
+          "role": "Yoga Instructor",
+          "title": "Certified Yoga Therapist",
+          "company": "Mindful Wellness Center",
+          "bio": "RYT-500 certified with 12 years experience in corporate wellness programs",
+          "photoUrl": "https://randomuser.me/api/portraits/women/33.jpg",
+          "displayOrder": 1
+        }
+      ],
+      "tags": ["outdoor", "wellness"],
+      "createdBy": "Sarah Miller"
     },
     {
-      "id": "2",
-      "date": "2025-01-20",
-      "title": "Leadership Workshop: Effective Communication",
-      "status": "Registered",
-      "startTime": "02:00 PM",
-      "endTime": "04:30 PM",
-      "location": "Training Room B",
-      "category": "Workshop",
-      "description": "Enhance your leadership skills with this interactive workshop focusing on communication strategies, active listening, and team motivation techniques.",
-      "registeredCount": 28,
-      "spotsLeft": 2,
-      "totalSpots": 30,
-      "waitlistCount": 0
+      "id": 6,
+      "title": "Mindful Meditation Break",
+      "description": "Guided meditation session to improve focus and reduce stress during the workday",
+      "eventTypeName": "Wellness",
+      "startDateTime": "2026-01-03T13:00:00.0000000",
+      "endDateTime": "2026-01-03T13:30:00.0000000",
+      "location": "Quiet Room 2B",
+      "capacity": 20,
+      "confirmedCount": 12,
+      "waitlistedCount": 0,
+      "isFull": false,
+      "organizerName": "Sarah Miller",
+      "organizerPosition": "Event Manager",
+      "organizerDepartment": "Human Resources",
+      "speakers": [
+        {
+          "id": 7,
+          "name": "Daniel Lee",
+          "role": "Mindfulness Coach",
+          "title": "Corporate Mindfulness Specialist",
+          "company": "CalmMind Studio",
+          "bio": "Leads mindfulness and meditation programs for fast-paced corporate teams",
+          "photoUrl": "https://randomuser.me/api/portraits/men/44.jpg",
+          "displayOrder": 1
+        }
+      ],
+      "tags": ["indoor", "meditation", "focus"],
+      "createdBy": "Sarah Miller"
     },
     {
-      "id": "3",
-      "date": "2025-01-24",
-      "title": "Happy Friday: Game Night",
-      "status": "Waitlisted",
-      "startTime": "06:00 PM",
-      "endTime": "09:00 PM",
-      "location": "Recreation Lounge",
-      "category": "Happy Friday",
-      "description": "Unwind after a productive week with board games, video games, and refreshments. A perfect opportunity to socialize with colleagues in a relaxed setting.",
-      "registeredCount": 50,
-      "spotsLeft": 0,
-      "totalSpots": 50,
-      "waitlistCount": 12
+      "id": 7,
+      "title": "Lunchtime Stretch & Mobility",
+      "description": "Light stretching and mobility session to relieve desk stiffness",
+      "eventTypeName": "Social",
+      "startDateTime": "2026-01-05T12:15:00.0000000",
+      "endDateTime": "2026-01-05T12:45:00.0000000",
+      "location": "Gym Studio 1",
+      "capacity": 25,
+      "confirmedCount": 18,
+      "waitlistedCount": 0,
+      "isFull": false,
+      "organizerName": "Sarah Miller",
+      "organizerPosition": "Event Manager",
+      "organizerDepartment": "Human Resources",
+      "speakers": [
+        {
+          "id": 8,
+          "name": "Laura García",
+          "role": "Fitness Trainer",
+          "title": "Certified Functional Trainer",
+          "company": "ActiveLife Corporate Fitness",
+          "bio": "Specializes in office-friendly movement routines for all fitness levels",
+          "photoUrl": "https://randomuser.me/api/portraits/women/12.jpg",
+          "displayOrder": 1
+        }
+      ],
+      "tags": ["indoor", "movement", "wellness"],
+      "createdBy": "Sarah Miller"
     },
     {
-      "id": "4",
-      "date": "2025-01-26",
-      "title": "Tech Talk: AI in Business Operations",
-      "status": "Registered",
-      "startTime": "11:00 AM",
-      "endTime": "12:30 PM",
-      "location": "Virtual Meeting",
-      "category": "Workshop",
-      "description": "Explore the latest AI technologies and their practical applications in streamlining business operations. Guest speaker from TechCorp will share insights and case studies.",
-      "registeredCount": 67,
-      "spotsLeft": 33,
-      "totalSpots": 100,
-      "waitlistCount": 0
+      "id": 8,
+      "title": "Sunset Yoga & Reflection",
+      "description": "Evening yoga flow followed by short journaling and reflection",
+      "eventTypeName": "Wellness",
+      "startDateTime": "2026-01-08T18:00:00.0000000",
+      "endDateTime": "2026-01-08T19:00:00.0000000",
+      "location": "Rooftop Terrace",
+      "capacity": 20,
+      "confirmedCount": 20,
+      "waitlistedCount": 3,
+      "isFull": true,
+      "organizerName": "Sarah Miller",
+      "organizerPosition": "Event Manager",
+      "organizerDepartment": "Human Resources",
+      "speakers": [
+        {
+          "id": 9,
+          "name": "Priya Sharma",
+          "role": "Yoga Instructor",
+          "title": "Certified Yoga Therapist",
+          "company": "Mindful Wellness Center",
+          "bio": "RYT-500 certified with 12 years experience in corporate wellness programs",
+          "photoUrl": "https://randomuser.me/api/portraits/women/33.jpg",
+          "displayOrder": 1
+        }
+      ],
+      "tags": ["outdoor", "yoga", "after-hours"],
+      "createdBy": "Sarah Miller"
     }
   ]
 }

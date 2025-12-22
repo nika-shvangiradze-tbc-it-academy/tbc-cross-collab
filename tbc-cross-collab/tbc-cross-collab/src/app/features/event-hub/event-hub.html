@@ -1,1 +1,145 @@
-<p>event-hub works!</p>
+<app-header></app-header>
+
+<div class="event-hub-container">
+  <div class="welcome-section">
+    <h1 class="welcome-title">Welcome back, {{ userName() }}</h1>
+    <p class="welcome-subtitle">Stay connected with upcoming company events and activities</p>
+  </div>
+
+  <div class="events-section">
+    <div class="events-header">
+      <h2 class="events-title">Upcoming Events</h2>
+      @if (selectedCategory()) {
+      <button class="clear-filter-btn" (click)="selectCategory(null)">Clear filter</button>
+      } @else {
+      <a href="#" class="view-all-link">
+        <span class="arrow-icon">→</span>
+        View all
+      </a>
+      }
+    </div>
+
+    @if (loading()) {
+    <div class="loading">Loading events...</div>
+    } @else if (events().length === 0) {
+    <div class="no-events">No upcoming events</div>
+    } @else {
+    <div class="events-list">
+      @for (event of events(); track event.id) {
+      <div class="event-card">
+        <div class="event-date-box">
+          <div class="date-month">{{ formatDate(event.date).month }}</div>
+          <div class="date-day">{{ formatDate(event.date).day }}</div>
+        </div>
+
+        <div class="event-content">
+          <div class="event-header">
+            <h3 class="event-title">{{ event.title }}</h3>
+            <span class="status-badge" [ngClass]="getStatusClass(event.status)">
+              {{ event.status }}
+            </span>
+          </div>
+
+          <div class="event-details">
+            <span class="detail-item">
+              <img src="assets/event-hub/event-clock.svg" alt="clock" class="icon" />
+              {{ event.startTime }} - {{ event.endTime }}
+            </span>
+            <span class="detail-item">
+              <img src="assets/event-hub/event-location.svg" alt="location" class="icon" />
+              {{ event.location }}
+            </span>
+            <span class="detail-item">
+              <img src="assets/event-hub/event-team-building.svg" alt="tag" class="icon" />
+              {{ event.category }}
+            </span>
+          </div>
+
+          <p class="event-description">{{ event.description }}</p>
+
+          <div class="event-footer">
+            <div class="registration-info">
+              <span class="people-icon">👥</span>
+              <span class="registered-count">+{{ event.registeredCount }} registered</span>
+              <span class="spots-info">{{ getRegistrationInfo(event) }}</span>
+            </div>
+            <button class="view-details-btn">View Details</button>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+    }
+  </div>
+
+  <div class="categories-section">
+    <h2 class="categories-title">Browse by Category</h2>
+    <div class="categories-list">
+      <div
+        class="category-card"
+        [class.active]="selectedCategory() === null"
+        (click)="selectCategory(null)"
+      >
+        <img
+          src="assets/event-hub/event-team-building.svg"
+          alt="all events"
+          class="category-icon"
+        />
+        <div class="category-name">All Events</div>
+        <div class="category-count">{{ allEvents().length }} events</div>
+      </div>
+      @for (category of getCategories(); track category.name) {
+      <div
+        class="category-card"
+        [class.active]="selectedCategory() === category.name"
+        (click)="selectCategory(category.name)"
+      >
+        <img [src]="category.icon" alt="category" class="category-icon" />
+        <div class="category-name">{{ category.name }}</div>
+        <div class="category-count">{{ category.count }} events</div>
+      </div>
+      }
+    </div>
+  </div>
+
+  @if (trendingEvents().length > 0) {
+  <div class="trending-section">
+    <div class="trending-header">
+      <h2 class="trending-title">Trending Events</h2>
+      <p class="trending-subtitle">Popular events with high registration rates</p>
+    </div>
+    <div class="trending-events-list">
+      @for (event of trendingEvents(); track event.id) {
+      <div class="trending-event-card">
+        <div class="trending-event-image">
+          <span class="image-placeholder">{{ event.title }}</span>
+        </div>
+        <div class="trending-event-tags">
+          <span class="tag category-tag">{{ event.category }}</span>
+          <span class="tag trending-tag">Trending</span>
+        </div>
+        <h3 class="trending-event-title">{{ event.title }}</h3>
+        <div class="trending-event-details">
+          <span class="trending-detail-item">
+            <img src="assets/event-hub/event-clock.svg" alt="clock" class="trending-icon" />
+            {{ formatDateForTrending(event.date) }}
+          </span>
+          <span class="trending-detail-item">
+            <img src="assets/event-hub/event-location.svg" alt="location" class="trending-icon" />
+            {{ event.location }}
+          </span>
+        </div>
+        <div class="trending-event-footer">
+          <span class="trending-attendance">
+            <span class="people-icons">👥👥</span>
+            +{{ event.registeredCount }} going
+          </span>
+          <button class="register-btn">Register</button>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+  }
+  <app-calendar [events]="allEvents()"></app-calendar>
+</div>

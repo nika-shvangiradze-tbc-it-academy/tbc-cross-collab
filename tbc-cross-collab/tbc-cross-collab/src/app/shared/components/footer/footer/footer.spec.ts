@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EventHub } from './event-hub';
+import { Footer } from './footer';
 
-describe('EventHub', () => {
-  let component: EventHub;
-  let fixture: ComponentFixture<EventHub>;
+describe('Footer', () => {
+  let component: Footer;
+  let fixture: ComponentFixture<Footer>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EventHub]
+      imports: [Footer]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(EventHub);
+    fixture = TestBed.createComponent(Footer);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
